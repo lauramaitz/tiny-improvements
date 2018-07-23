@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Col, Container, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import AwardCard from "./components/AwardCard";
-import NameCard from "./components/NameCard";
+import VoteForm from "./components/VoteForm";
+import KudosForm from "./components/KudosForm";
 
 class App extends Component {
 
@@ -30,23 +31,6 @@ class App extends Component {
           score: 4.5
         }
       ],
-      students: [
-        {
-          name: "Alia",
-          userId: 10457,
-          position: "Solution Engineer",
-        },
-        {
-          name: "Cody",
-          userId: 10850,
-          position: "Senior Functional Consultant"
-        },
-        {
-          name: "Ana",
-          userId: 10222,
-          position: "Lead Solutions Engineer"
-        }
-      ],
       users: [
         {
           userId: 45089,
@@ -68,17 +52,23 @@ class App extends Component {
         {
           id: 1,
           title: "Best Boss Award!",
-          comment: "Thanks for always looking out for us."
+          comment: "Thanks for always looking out for us.",
+          sender: "Fabian",
+          receiver: "Leon"
         },
         {
           id: 2,
           title: "Longest Commute Award!",
-          comment: "I can't believe Leslie makes it to work as often as she does."
+          comment: "I can't believe Laura makes it to work as often as she does.",
+          sender: "Archit",
+          receiver: "Laura"
         },
         {
           id: 3,
           title: "Most likely to nap at work!",
-          comment: "Maybe you need more coffee."
+          comment: "Maybe you need more coffee.",
+          sender: "Gobi",
+          receiver: "Owen"
         }
       ]
     }
@@ -98,32 +88,12 @@ class App extends Component {
             <Button color="success">Give Kudos</Button>
           </Col>
           <Col md="12" lg="9">
-            {this.state.awards.map(award => <AwardCard id={award.id} title={award.title} comment={award.comment} />)}
+            {this.state.awards.map(award => <AwardCard id={award.id} title={award.title} comment={award.comment} receiver={award.receiver} />)}
           </Col>
         </Row>
         <hr />
         <h1>Give Kudos!</h1>
-        <Row>
-          <Col md="12">
-            <Form>
-              <FormGroup>
-                <Label>Give Kudos to:</Label>
-                <Input type="select">
-                  {this.state.users.map(user => <option>{user.name}</option>)}
-                  {this.state.students.map(student => <option>{student.name}</option>)}
-                </Input>
-              </FormGroup>
-              <FormGroup>
-                <Input type="text" placeholder="Kudos Title" />
-              </FormGroup>
-              <FormGroup>
-                <Input type="textarea" placeholder="Kudos Text" />
-              </FormGroup>
-            </Form>
-          </Col>
-        </Row>
-        {this.state.users.map(user => <NameCard name={user.name} age={user.userId} />)}
-        {this.state.students.map(student => <NameCard name={student.name} age={student.userId} />)}
+        {this.state.users.map(user => <KudosForm user={user.name} />)}
       </Container>
     );
   }
