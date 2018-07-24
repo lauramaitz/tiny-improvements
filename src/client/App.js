@@ -55,8 +55,7 @@ class App extends Component {
           comment: "Maybe you need more coffee.",
           sender: "Gobi",
           receiver: "Owen"
-        }
-      ],
+        }],
       pets: []
     }
   }
