@@ -6,7 +6,7 @@ const KudosForm = props => (
         <FormGroup>
             <Label>Give Kudos to:</Label>
             <Input type="select">
-                {<option>{props.user}</option>}
+                {props.user.map(user => <option>{user.name}</option>)}
             </Input>
         </FormGroup>
         <FormGroup>

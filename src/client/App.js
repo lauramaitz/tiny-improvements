@@ -89,9 +89,7 @@ class App extends Component {
         </Row>
         <hr />
         <h1>Give Kudos!</h1>
-        {
-          this.state.users.map(user => <KudosForm user={user.name} />)
-        }
+        <KudosForm user={this.state.users} />
         <br />
         {
           this.state.pets.map(pet => <PetCard name={pet.name} age={pet.age} />)
