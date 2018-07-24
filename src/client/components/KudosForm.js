@@ -6,7 +6,7 @@ const KudosForm = props => (
         <FormGroup>
             <Label>Give Kudos to:</Label>
             <Input type="select">
-                <option>{props.user}</option>
+                {<option>{props.user}</option>}
             </Input>
         </FormGroup>
         <FormGroup>

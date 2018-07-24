@@ -3,6 +3,8 @@ import { Col, Container, Row, Button, Form, FormGroup, Label, Input } from "reac
 import AwardCard from "./components/AwardCard";
 import VoteForm from "./components/VoteForm";
 import KudosForm from "./components/KudosForm";
+import PetCard from "./components/PetCard";
+import axios from "axios";
 
 class App extends Component {
 
@@ -31,23 +33,7 @@ class App extends Component {
           score: 4.5
         }
       ],
-      users: [
-        {
-          userId: 45089,
-          name: "Owen",
-          position: "Captian of the Breakroom"
-        },
-        {
-          userId: 223,
-          name: "Brooke",
-          position: "Winner of All Dance-Offs"
-        },
-        {
-          userId: 6582,
-          name: "Gobi",
-          position: "King of Mid-Day Naps"
-        }
-      ],
+      users: [],
       awards: [
         {
           id: 1,
@@ -70,8 +56,16 @@ class App extends Component {
           sender: "Gobi",
           receiver: "Owen"
         }
-      ]
+      ],
+      pets: []
     }
+  }
+
+  componentDidMount = () => {
+    axios.get("/api/users")
+      .then(response => {
+        this.setState({ users: response.data })
+      })
   }
 
   render() {
@@ -88,12 +82,20 @@ class App extends Component {
             <Button color="success">Give Kudos</Button>
           </Col>
           <Col md="12" lg="9">
-            {this.state.awards.map(award => <AwardCard id={award.id} title={award.title} comment={award.comment} receiver={award.receiver} />)}
+            {
+              this.state.awards.map(award => <AwardCard id={award.id} title={award.title} comment={award.comment} receiver={award.receiver} />)
+            }
           </Col>
         </Row>
         <hr />
         <h1>Give Kudos!</h1>
-        {this.state.users.map(user => <KudosForm user={user.name} />)}
+        {
+          this.state.users.map(user => <KudosForm user={user.name} />)
+        }
+        <br />
+        {
+          this.state.pets.map(pet => <PetCard name={pet.name} age={pet.age} />)
+        }
       </Container>
     );
   }
