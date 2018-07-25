@@ -34,28 +34,7 @@ class App extends Component {
         }
       ],
       users: [],
-      awards: [
-        {
-          id: 1,
-          title: "Best Boss Award!",
-          comment: "Thanks for always looking out for us.",
-          sender: "Fabian",
-          receiver: "Leon"
-        },
-        {
-          id: 2,
-          title: "Longest Commute Award!",
-          comment: "I can't believe Laura makes it to work as often as she does.",
-          sender: "Archit",
-          receiver: "Laura"
-        },
-        {
-          id: 3,
-          title: "Most likely to nap at work!",
-          comment: "Maybe you need more coffee.",
-          sender: "Gobi",
-          receiver: "Owen"
-        }],
+      awards: [],
       pets: []
     }
   }
@@ -64,6 +43,13 @@ class App extends Component {
     axios.get("/api/users")
       .then(response => {
         this.setState({ users: response.data })
+      })
+  }
+
+  componentDidMount = () => {
+    axios.get("/api/awards")
+      .then(response => {
+        this.setState({ awards: response.data })
       })
   }
 
@@ -90,9 +76,6 @@ class App extends Component {
         <h1>Give Kudos!</h1>
         <KudosForm user={this.state.users} />
         <br />
-        {
-          this.state.pets.map(pet => <PetCard name={pet.name} age={pet.age} />)
-        }
       </Container>
     );
   }
