@@ -25,28 +25,6 @@ const users = [
         position: "Queen of the World"
     }
 ];
-const pets = [
-    {
-        name: 'Memphis',
-        age: 12,
-        type: 'Dog'
-    },
-    {
-        name: 'Baby',
-        age: 11,
-        type: 'Panther'
-    },
-    {
-        name: 'Peach',
-        age: 3,
-        type: 'Cat'
-    },
-    {
-        name: 'Opal',
-        age: 1,
-        type: 'Kitten'
-    }
-];
 const awards = [
     {
         id: 1,
@@ -69,7 +47,9 @@ const awards = [
         sender: "Gobi",
         receiver: "Owen"
     },
-]
+];
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -78,8 +58,19 @@ app.use(express.static("public"));
 
 app.get("/api/users", (req, res) => res.json(users));
 app.get("/api/pets", (req, res) => res.json(pets));
-app.get("/aip/awards", (req, res) => res.json(awards));
+app.get("/api/awards", (req, res) => res.json(awards));
 app.post("/api/users", (req, res) => console.log("we want to create"));
+
+//learning time//
+app.get("/api/friends", (req, res) => res.json(friends));
+app.post("/api/kudos", (req, res) => {
+    console.log("----THE REQUEST BODY-------------------------------");
+    console.log(req.body);
+    console.log("-----------------------------------");
+    awards.push(req.body);
+    res.json(awards);
+});
+// learning time
 
 app.listen(PORT, function () {
     console.log(`We are connected 🌎 on PORT ${PORT}`);

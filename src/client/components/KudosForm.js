@@ -6,15 +6,24 @@ const KudosForm = props => (
         <FormGroup>
             <Label>Give Kudos to:</Label>
             <Input type="select">
-                {props.user.map(user => <option>{user.name}</option>)}
+                {props.user.map((user, index) => <option key={index}>{user.name}</option>)}
             </Input>
         </FormGroup>
         <FormGroup>
-            <Input type="text" placeholder="Kudos Title" />
+            <Input
+                type="text"
+                placeholder="Kudos Title"
+            />
         </FormGroup>
         <FormGroup>
-            <Input type="textarea" placeholder="Kudos Text" />
+            <Input
+                type="textarea"
+                placeholder="Kudos Text"
+                onChange={props.updateKudos}
+                value={props.kudos}
+            />
         </FormGroup>
+        <Button color="success" onClick={props.postKudos}> Give Kudos! </Button>
     </Form>
 )
 
