@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Col, Container, Row, Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 import AwardCard from "./components/AwardCard";
-import VoteForm from "./components/VoteForm";
 import KudosForm from "./components/KudosForm";
-import PetCard from "./components/PetCard";
 import axios from "axios";
 
 class App extends Component {
@@ -12,7 +10,11 @@ class App extends Component {
     super();
     this.state = {
       users: [],
-      awards: []
+      awards: [],
+      KudosText: "",
+      KudosTitle: "",
+      KudosReceiver: "",
+      KudosSender: ""
     }
   }
 
@@ -25,26 +27,36 @@ class App extends Component {
       .then(response => {
         this.setState({ users: response.data })
       })
-    // todays class example
-    axios.get("/api/friends")
-      .then(response => {
-        this.setState({ friends: response.data })
-      })
   }
+
+  updateKudosText = (event) => {
+    this.setState({ KudosText: event.target.value });
+  }
+
+  updateKudosTitle = (event) => {
+    this.setState({ KudosTitle: event.target.value });
+  }
+
+  updateKudosReceiver = (event) => {
+    this.setState({ KudosReceiver: event.target.value });
+  }
+
+  updateKudosSender = (event) => {
+    this.setState({ KudosSender: event.target.value });
+  }
+
   postKudos = () => {
     axios.post("/api/kudos", {
-      id: 5,
-      title: "Fastest Typer Award",
-      comment: "Have you seen how fast George types??"
+      id: 0,
+      title: this.state.KudosTitle,
+      comment: this.state.KudosText,
+      sender: this.state.KudosSender,
+      receiver: this.state.KudosReceiver,
     }).then(response => {
       this.setState({
         awards: response.data
       })
     })
-  }
-
-  updateKudos = event => {
-    this.setState({ kudo: event.target.value });
   }
 
   render() {
@@ -59,23 +71,27 @@ class App extends Component {
         <Row>
           <Col md="12" lg="9">
             {
-              this.state.awards.map((award, index) => <AwardCard key={index} id={award.id} title={award.title} comment={award.comment} receiver={award.receiver} />)
+              this.state.awards.map((award, index) => <AwardCard key={index} id={award.id} title={award.title} comment={award.comment} receiver={award.receiver} sender={award.sender} />)
             }
           </Col>
         </Row>
         <hr />
         <h1>Give Kudos!</h1>
         <KudosForm
-          postKudos={this.postKudos}
           user={this.state.users}
-          kudos={this.state.kudos}
-          updateKudos={this.updateKudos}
+          KudosText={this.state.KudosText}
+          KudosTitle={this.state.KudosTitle}
+          KudosReceiver={this.state.KudosReceiver}
+          KudosSender={this.state.KudosSender}
+          updateKudosReceiver={this.updateKudosReceiver}
+          updateKudosText={this.updateKudosText}
+          updateKudosTitle={this.updateKudosTitle}
+          updateKudosSender={this.updateKudosSender}
+          postKudos={this.postKudos}
         />
         <br />
 
-        {/* ERROR NOTES: BUTTON IS STILL PUSHING PREDEFINED VALUES, NOT NEW VALUES */}
-
-      </Container>
+      </Container >
     );
   }
 }
