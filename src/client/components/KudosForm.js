@@ -35,7 +35,6 @@ const KudosForm = props => (
                 value={props.KudosText}
             />
         </FormGroup>
-        <Button color="success" onClick={props.postKudos}> Give Kudos! </Button>
     </Form>
 )
 
