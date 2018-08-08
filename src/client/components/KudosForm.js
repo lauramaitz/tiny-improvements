@@ -6,6 +6,7 @@ const KudosForm = props => (
         <FormGroup>
             <Label>Who do you want to thank?</Label>
             <Input type="select" onChange={props.updateKudosReceiver} value={props.receiver}>
+                <option>--Select User--</option>
                 {props.user.map((user, index) =>
                     <option key={index}>{user.name}</option>
                 )}
@@ -13,7 +14,12 @@ const KudosForm = props => (
         </FormGroup>
         <FormGroup>
             <Label>From:</Label>
-            <Input type="select" onChange={props.updateKudosSender} value={props.sender}>
+            <Input
+                type="select"
+                placeholder="My Name"
+                onChange={props.updateKudosSender}
+                value={props.sender}>
+                <option>--Select User--</option>
                 {props.user.map((user, index) =>
                     <option key={index}>{user.name}</option>
                 )}

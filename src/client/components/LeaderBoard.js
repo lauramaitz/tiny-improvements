@@ -1,5 +1,5 @@
 import React from "react";
-import { CardHeader, Table, Card, CardBody, Alert } from "reactstrap";
+import { Table, Card, CardBody, Alert } from "reactstrap";
 
 const LeaderBoard = props =>
     <Card body className="text-center">
