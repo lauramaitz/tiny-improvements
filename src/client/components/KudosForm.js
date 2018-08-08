@@ -4,16 +4,16 @@ import { Col, Container, Row, Form, FormGroup, Input, Label, Button, Card, CardB
 const KudosForm = props => (
     <Form>
         <FormGroup>
-            <Label>Give Kudos to:</Label>
-            <Input type="select" onChange={props.updateKudosReceiver} value={props.KudosReceiver}>
+            <Label>Who do you want to thank?</Label>
+            <Input type="select" onChange={props.updateKudosReceiver} value={props.receiver}>
                 {props.user.map((user, index) =>
                     <option key={index}>{user.name}</option>
                 )}
             </Input>
         </FormGroup>
         <FormGroup>
-            <Label>Sender:</Label>
-            <Input type="select" onChange={props.updateKudosSender} value={props.KudosSender}>
+            <Label>From:</Label>
+            <Input type="select" onChange={props.updateKudosSender} value={props.sender}>
                 {props.user.map((user, index) =>
                     <option key={index}>{user.name}</option>
                 )}
@@ -22,17 +22,17 @@ const KudosForm = props => (
         <FormGroup>
             <Input
                 type="text"
-                placeholder="Kudos Title"
+                placeholder="Subject"
                 onChange={props.updateKudosTitle}
-                value={props.KudosTitle}
+                value={props.title}
             />
         </FormGroup>
         <FormGroup>
             <Input
                 type="textarea"
-                placeholder="Kudos Text"
+                placeholder="Type your thanks message here..."
                 onChange={props.updateKudosText}
-                value={props.KudosText}
+                value={props.text}
             />
         </FormGroup>
     </Form>
